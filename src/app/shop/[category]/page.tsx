@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCategories, getCategoryBySlug, getLiveProducts } from "@/lib/catalog";
+import { getCustomProductsForCategory } from "@/lib/customProducts";
 import ProductCard from "../_components/ProductCard";
+import CustomProductCard from "../_components/CustomProductCard";
 
 export function generateStaticParams() {
   return getCategories().map((category) => ({ category: category.slug }));
@@ -30,6 +32,8 @@ export default async function CategoryPage({
   if (!category) notFound();
 
   const products = getLiveProducts(category);
+  const customProducts = getCustomProductsForCategory(category.slug);
+  const hasProducts = products.length > 0 || customProducts.length > 0;
 
   return (
     <section className="section ready">
@@ -43,8 +47,11 @@ export default async function CategoryPage({
           {category.description && <p>{category.description}</p>}
         </div>
 
-        {products.length > 0 ? (
+        {hasProducts ? (
           <div className="product-grid reveal">
+            {customProducts.map((product) => (
+              <CustomProductCard key={product.id} product={product} />
+            ))}
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

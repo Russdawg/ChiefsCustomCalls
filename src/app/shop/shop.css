@@ -166,6 +166,29 @@
 }
 .product-card.is-sold-out .product-shot img{opacity:.55}
 
+.badge-new{
+  position:absolute;
+  top:.85rem;
+  right:.85rem;
+  font-family:'Courier Prime',monospace;
+  font-size:.62rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink);
+  background:var(--hedge-soft);
+  border-radius:999px;
+  padding:.3rem .7rem;
+  z-index:2;
+}
+.product-card-desc{
+  font-size:.85rem;
+  color:var(--canvas-ink-soft);
+  margin-bottom:1rem;
+}
+.paypal-buttons{display:flex;gap:.75rem;flex-wrap:wrap}
+.paypal-buttons form{display:contents}
+.paypal-buttons button{cursor:pointer}
+
 .shop-footer{
   background:var(--ink);
   border-top:1px solid var(--line-dark);
